@@ -77,6 +77,12 @@ function createSupplementaryPoints(geojson, options = {}, basePath = null) {
     });
   }
 
+  const userProperties = Object.keys(geojson.properties).filter(k => k.includes('user_'));
+
+  supplementaryPoints.forEach((p) => {
+    userProperties.forEach((k) => { p.properties[k] = geojson.properties[k]; });
+  });
+
   return supplementaryPoints;
 }
 
